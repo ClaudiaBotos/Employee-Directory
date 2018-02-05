@@ -39,6 +39,10 @@ h3 {
 }
 
 
+.employeeName a {
+    text-decoration: none;
+    color: black;
+}
 
 
 
@@ -158,7 +162,7 @@ z-index: 1;
 left: 0;
 top: 0;
 overflow: auto;
-background-color: rgba(0,0, 0, .2);
+background-color: rgba(0,0, 0, .3);
 }
 
 .modal-bg.active{
@@ -171,8 +175,9 @@ background-color: rgba(0,0, 0, .2);
     background-color: #fff;
     margin: 20% auto;
     padding: 20px;
-    width: 30%;
-    height: 50%;
+    width: 90%;
+    height: 60%;
+    border-radius: 10px;
     box-shadow: 0 5px 8px 0 rgba(0,0,0, .03);
 
 }
@@ -202,11 +207,27 @@ background-color: rgba(0,0, 0, .2);
 }
 
 
+.hr {
+  margin: 15px;
+  border: 0; 
+  height: 1px; 
+  background-image: -webkit-linear-gradient(left, #f0f0f0, #8c8b8b, #f0f0f0);
+  background-image: -moz-linear-gradient(left, #f0f0f0, #8c8b8b, #f0f0f0);
+  background-image: -ms-linear-gradient(left, #f0f0f0, #8c8b8b, #f0f0f0);
+  background-image: -o-linear-gradient(left, #f0f0f0, #8c8b8b, #f0f0f0); 
+}
 
 
 
 
+.modal-name {
+    margin: 10px auto;
+}
 
+.modal-email, 
+.modal-city {
+    margin: 5px;
+}
 
 
 
@@ -267,6 +288,41 @@ background-color: rgba(0,0, 0, .2);
     }
     
     
+    .modal-content {
+        height: 50%;
+        width: 60%;
+    }
+    
+    /****Style extra info****/
+    
+ .content-modal img {
+    float: none;
+   margin: 25px auto;
+   width: 150px ;
+  height: 150px ;    
+
+ }
+    .modal-name {
+        margin-top: 10px;
+    }
+    
+    .hr {
+        margin-top: 25px;
+    
+    }
+    
+    .modal-name,
+    .modal-email, 
+    .modal-city {
+        text-align: center;
+        margin: 5px 0;
+      }
+    
+    .extra-info {
+        text-align: center;
+       margin-bottom: 30px;
+    }
+    
   
 }
 
@@ -286,6 +342,11 @@ background-color: rgba(0,0, 0, .2);
         width: 30%;
     }
     
+    .modal-content {
+         width: 25%;
+        height: 65%;
+       
+    }
     
     
 }

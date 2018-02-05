@@ -2,7 +2,7 @@ $(document).ready(()=>{
     const employeeWrapper = document.getElementById('employee-list');
     const contentModal = document.getElementById('content-modal');
     const windowModal= document.getElementById('window-modal');
-    const filterSearch= document.getElementById('mySearch');
+    const filterSearch= document.getElementById('search');
     
     var employeeTotal=12;
     let employeeInfo=[];
@@ -25,7 +25,7 @@ $(document).ready(()=>{
             let state = newEmployee.location.state;
             let postcode = newEmployee.location.postcode;
             let nationality = newEmployee.nat; 
-            let birthday = newEmployee.dob;
+            let birthday = newEmployee.dob.substring(0, 10).replace(/-/g, "/", -1);
             
             
             employeeInfo.push({
@@ -49,11 +49,10 @@ function getEmployee(employee) {
     let memberDiv = '<div class="employee-box">';
     memberDiv+= employee.pic;
     memberDiv+= '<div class="shortInfo-wrapper">';
-    memberDiv+= '<h3 class="employeeName">' + employee.name + '</h3>';
+    memberDiv+= '<h3 class="employeeName" >' + '<a href="#">' + employee.name + '</a>' + '</h3>';
     memberDiv+= '<p class="employeeEmail">' +employee.email + '</p>';
     memberDiv+= '<p class="employeeCity">' +employee.city + '</p>';
     memberDiv += '</div>';
-	memberDiv += '<div class="modal-box"></div>';
 	memberDiv += '</div>';
 	
     $("#employee-list").append(memberDiv);
@@ -70,7 +69,9 @@ function getEmployee(employee) {
 		modalHTML += '<h3 class="modal-name">' + employee.name + '</h3>';
 		modalHTML += '<p class="modal-email">'+ employee.email + '</p>';
 		modalHTML += '<p class="modal-city">'+ employee.city + '</p>';
-		modalHTML += '<div class="hr extra-info">';
+		modalHTML += '<div class=" extra-info">';
+         modalHTML += '<hr class="hr">';
+         
 		modalHTML += '<p class="modal-cell">'+ employee.cell + '</p>';
 		modalHTML += '<p class="modal-address">'+ employee.street + ", " +  employee.country + " "+ employee.postcode +'</p>';
 		modalHTML += '<p class="modal-dob">Birthday: '+ employee.dob + '</p>';
@@ -91,17 +92,35 @@ function getEmployee(employee) {
     
 
     $('.close-btn').on('click', function() {
-        
+        $('.content-modal').text('');
         $('.modal-bg').removeClass('active');
         $('.modal-content').removeClass('active');
-       
         
-       
- 
+
     });
     
-
-  
+//get the modal
+    
+    const modal =document.getElementById('modal');
+    
+    // Close modal when clicking outside it
+    
+   window.onclick = function(event) {
+    if (event.target == modal) {
+        $('.content-modal').text('');
+        $('.modal-bg').removeClass('active');
+        $('.modal-content').removeClass('active');
+    }
+      
+    };
+    
+    
+    
+   // Search filter by name
+    
+   
+ 
+    
 
    $.ajax({
 	  url: 'https://randomuser.me/api/?format=json&results=' + employeeTotal + '&inc=picture,name,login,email,location,cell,dob,nat&nat=us,gb',
