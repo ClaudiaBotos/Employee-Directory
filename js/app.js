@@ -3,15 +3,15 @@ $(document).ready(()=>{
     const contentModal = document.getElementById('content-modal');
     const windowModal= document.getElementById('window-modal');
     const filterSearch= document.getElementById('search');
-    
+
     var employeeTotal=12;
     let employeeInfo=[];
-    
-    
-    
-    
-    
-    
+
+
+
+
+
+
     function getDetails(results) {
         for (let i = 0; i< employeeTotal ; i++) {
             let newEmployee= results[i];
@@ -24,10 +24,10 @@ $(document).ready(()=>{
             let city = newEmployee.location.city;
             let state = newEmployee.location.state;
             let postcode = newEmployee.location.postcode;
-            let nationality = newEmployee.nat; 
-            let birthday = newEmployee.dob.substring(0, 10).replace(/-/g, "/", -1);
-            
-            
+            let nationality = newEmployee.nat;
+            let birthday = newEmployee.dob.date.substring(0, 10).replace(/-/g, "/", -1);
+
+
             employeeInfo.push({
                 "index" : i,
 				"pic": profilePic,
@@ -43,8 +43,8 @@ $(document).ready(()=>{
             });
         }
     } // end of the details request
-    
-    
+
+
 function getEmployee(employee) {
     let memberDiv = '<div class="employee-box">';
     memberDiv+= employee.pic;
@@ -54,16 +54,16 @@ function getEmployee(employee) {
     memberDiv+= '<p class="employeeCity">' +employee.city + '</p>';
     memberDiv += '</div>';
 	memberDiv += '</div>';
-	
+
     $("#employee-list").append(memberDiv);
-    
+
 }
-    
-    
+
+
      function setContent(employee) {
-         
-         
-         
+
+
+
     let modalHTML= '';
 		modalHTML += employee.pic;
 		modalHTML += '<h3 class="modal-name">' + employee.name + '</h3>';
@@ -71,17 +71,17 @@ function getEmployee(employee) {
 		modalHTML += '<p class="modal-city">'+ employee.city + '</p>';
 		modalHTML += '<div class=" extra-info">';
          modalHTML += '<hr class="hr">';
-         
+
 		modalHTML += '<p class="modal-cell">'+ employee.cell + '</p>';
 		modalHTML += '<p class="modal-address">'+ employee.street + ", " +  employee.country + " "+ employee.postcode +'</p>';
 		modalHTML += '<p class="modal-dob">Birthday: '+ employee.dob + '</p>';
 		modalHTML += '</div>';
 		$("#content-modal").append(modalHTML);
 	} //end setModalContent
-    
-    
- 
-  
+
+
+
+
   $(employeeWrapper).on('click', ".employee-box", e => {  // add argument for delegated handler
       $('.modal-bg').addClass('active');
       $ ('.modal-content').addClass('active');
@@ -89,38 +89,38 @@ function getEmployee(employee) {
       let selectedID = $(selectedBox).index();
       setContent(employeeInfo[selectedID]);
   });
-    
+
 
     $('.close-btn').on('click', function() {
         $('.content-modal').text('');
         $('.modal-bg').removeClass('active');
         $('.modal-content').removeClass('active');
-        
+
 
     });
-    
+
 //get the modal
-    
+
     const modal =document.getElementById('modal');
-    
+
     // Close modal when clicking outside it
-    
+
    window.onclick = function(event) {
     if (event.target == modal) {
         $('.content-modal').text('');
         $('.modal-bg').removeClass('active');
         $('.modal-content').removeClass('active');
     }
-      
+
     };
-    
-    
-    
+
+
+
    // Search filter by name
-    
-   
- 
-    
+
+
+
+
 
    $.ajax({
 	  url: 'https://randomuser.me/api/?format=json&results=' + employeeTotal + '&inc=picture,name,login,email,location,cell,dob,nat&nat=us,gb',
@@ -134,5 +134,5 @@ function getEmployee(employee) {
 	});//end ajax
 
 
-    
+
 }); //end ready
